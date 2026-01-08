@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Inventarios | Mansión Rosé</title>
 
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="header">
+        <h1>Sistema de Inventarios</h1>
+        <p>Mansión Rosé · Control de productos por emprendedora</p>
+    </header>
+
+    <!-- MENÚ PRINCIPAL -->
+    <nav class="menu">
+        <ul>
+            <li><a href="#productos">Registro de Productos</a></li>
+            <li><a href="#inventario">Inventario</a></li>
+            <li><a href="#ventas">Registro de Ventas</a></li>
+            <li><a href="#reportes">Reportes</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido">
+
+        <!-- SECCIÓN PRODUCTOS -->
+        <section id="productos" class="seccion">
+            <h2>Registro de Productos</h2>
+
+            <form id="formProducto">
+                <label>Nombre del producto</label>
+                <input type="text" id="nombreProducto" required>
+
+                <label>Categoría</label>
+                <input type="text" id="categoriaProducto">
+
+                <label>Precio</label>
+                <input type="number" id="precioProducto" step="0.01">
+
+                <label>Stock inicial</label>
+                <input type="number" id="stockProducto">
+
+                <label>Emprendedora</label>
+                <select id="emprendedora">
+                    <option value="1">Emprendedora 1</option>
+                    <option value="2">Emprendedora 2</option>
+                </select>
+
+                <button type="submit">Guardar Producto</button>
+            </form>
+        </section>
+
+        <!-- SECCIÓN INVENTARIO -->
+        <section id="inventario" class="seccion">
+            <h2>Inventario Disponible</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Emprendedora</th>
+                        <th>Stock</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaInventario">
+                    <!-- Datos dinámicos -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN VENTAS -->
+        <section id="ventas" class="seccion">
+            <h2>Registro de Ventas</h2>
+
+            <form id="formVenta">
+                <label>Producto</label>
+                <select id="productoVenta"></select>
+
+                <label>Cantidad</label>
+                <input type="number" id="cantidadVenta">
+
+                <label>Canal de venta</label>
+                <select id="canalVenta">
+                    <option>Showroom</option>
+                    <option>Instagram</option>
+                    <option>WhatsApp</option>
+                </select>
+
+                <button type="submit">Registrar Venta</button>
+            </form>
+        </section>
+
+        <!-- SECCIÓN REPORTES -->
+        <section id="reportes" class="seccion">
+            <h2>Reportes Básicos</h2>
+            <ul>
+                <li>Productos con bajo stock</li>
+                <li>Ventas por canal</li>
+                <li>Historial de movimientos</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+        <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+
+</body>
+</html>
