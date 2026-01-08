@@ -12,7 +12,7 @@ document.getElementById("formProducto").addEventListener("submit", function(e) {
     }
   };
 
-  fetch("https://api.sheety.co/tuProyecto/inventario/productos", {
+  fetch("https://api.sheety.co/301327363ae1c8d017800bb4566af87c/inventarioMansión/productos", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
