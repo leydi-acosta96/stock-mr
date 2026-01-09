@@ -1,6 +1,6 @@
 const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr";
 const HEADERS = {
-  "Authorization": "mr12#"
+  "Authorization": "Bearer mr12#"
 };
 
 const tablaInventario = document.getElementById("tablaInventario");
