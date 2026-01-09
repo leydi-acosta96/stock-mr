@@ -1,25 +1,36 @@
-document.getElementById("formProducto").addEventListener("submit", function(e) {
-  e.preventDefault();
+const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr";
+const HEADERS = {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer TU_TOKEN"
+};
 
-  const data = {
-    producto: {
-      nombre_producto: nombre.value,
-      categoria: categoria.value,
-      precio: precio.value,
-      stock: stock.value,
-      estado: "Activo",
-      emprendedora_id: 1
-    }
-  };
+const formProducto = document.getElementById("formProducto");
 
-  fetch("https://api.sheety.co/301327363ae1c8d017800bb4566af87c/inventarioMansión/productos", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer TU_TOKEN"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(res => res.json())
-  .then(() => alert("Producto registrado"));
-});
+if (formProducto) {
+  formProducto.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const producto = {
+      producto: {
+        nombre_producto: document.getElementById("nombreProducto").value,
+        categoria: document.getElementById("categoriaProducto").value,
+        precio: document.getElementById("precioProducto").value,
+        stock: document.getElementById("stockProducto").value,
+        emprendedora_id: document.getElementById("emprendedora").value,
+        estado: "Activo"
+      }
+    };
+
+    fetch(`${API_URL}/productos`, {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify(producto)
+    })
+      .then(res => res.json())
+      .then(() => {
+        alert("Producto registrado correctamente");
+        formProducto.reset();
+      })
+      .catch(error => console.error("Error:", error));
+  });
+}
