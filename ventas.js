@@ -50,4 +50,25 @@ if (formVenta) {
         formVenta.reset();
       });
   });
+
+  const selectProducto = document.getElementById("productoVenta");
+
+function cargarProductosVenta() {
+  fetch(`${API_URL}/productos`, {
+    headers: HEADERS
+  })
+    .then(res => res.json())
+    .then(data => {
+      selectProducto.innerHTML = "";
+      data.productos.forEach(p => {
+        const option = document.createElement("option");
+        option.value = p.id;
+        option.textContent = `${p.nombre_producto} (Stock: ${p.stock})`;
+        selectProducto.appendChild(option);
+      });
+    });
+}
+
+if (selectProducto) {
+  cargarProductosVenta();
 }
