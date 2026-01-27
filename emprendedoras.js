@@ -6,19 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const nombre = document.getElementById("nombreEmprendedora").value.trim();
-    const contacto = document.getElementById("contactoEmprendedora").value.trim();
-
-    if (!nombre) {
-      alert("El nombre es obligatorio");
-      return;
-    }
-
     const data = {
       emprendedora: {
-        nombreEmprendedora: nombre, // 🔥 CLAVE
-        contacto: contacto,
-        estado: "Activo"
+        id: document.getElementById("idEmprendedora").value.trim(),
+        nombre_emprendedora: document.getElementById("nombreEmprendedora").value.trim(),
+        nombre_emprendimiento: document.getElementById("nombreEmprendimiento").value.trim(),
+        contacto: document.getElementById("contactoEmprendedora").value.trim(),
+        estado: document.getElementById("estadoEmprendedora").value
       }
     };
 
@@ -31,12 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify(data)
     })
     .then(res => res.json())
-    .then(resp => {
-      console.log("GUARDADO:", resp);
+    .then(() => {
       alert("Emprendedora registrada correctamente");
       form.reset();
     })
-    .catch(err => console.error("ERROR:", err));
+    .catch(err => console.error("Error:", err));
   });
 
 });
