@@ -8,12 +8,12 @@
     const data = {
       emprendedora: {
         id: document.getElementById("idEmprendedora").value,
-        nombre_emprendedora: document.getElementById("nombreEmprendedora").value,
-        nombre_emprendimiento: document.getElementById("nombreEmprendimiento").value,
-        contacto: document.getElementById("contactoEmprendedora").value,
-        instagram: document.getElementById("instagramEmprendedora").value,
-        correo: document.getElementById("correoEmprendedora").value,
-        estado: document.getElementById("estadoEmprendedora").value
+        nombreEmprendedora: document.getElementById("nombreEmprendedora").value,
+        nombreEmprendimiento: document.getElementById("nombreEmprendimiento").value,
+        contactoEmprendedora: document.getElementById("contactoEmprendedora").value,
+        instagramEmprendedora: document.getElementById("instagramEmprendedora").value,
+        correoEmprendedora: document.getElementById("correoEmprendedora").value,
+        estadoEmprendedora: document.getElementById("estadoEmprendedora").value
       }
     };
 
