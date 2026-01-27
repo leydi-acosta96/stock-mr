@@ -10,22 +10,22 @@
 </head>
 <body>
 
-    <section id="productos" class="seccion">
-            <h2>Registro de Emprendedoras</h2>
+      <section class="seccion">
+      <h2>Registro de Emprendedoras</h2>
+    
+      <form id="formEmprendedora">
+    
+        <label>Nombre de la emprendedora</label>
+        <input type="text" id="nombreEmprendedora" required>
+    
+        <label>Contacto</label>
+        <input type="text" id="contactoEmprendedora">
+    
+        <button type="submit">Guardar Emprendedora</button>
+        <button type="button" onclick="volverInicio()">⬅ Volver al inicio</button>
+    
+      </form>
+    </section>
 
-            <form id="formEmprendedora">
-              <!-- codigo automatico para base de datos -->
-                <label>Nombre del Emprendimiento</label>
-                <input type="text" id="nombreEmprendimiento" required>
-
-                <label>Contacto</label>
-                <input type="text" id="contactoEmprendimiento">
-
-                <label>Estado</label>
-                <input type="text" id="estadoEmprendimiento" step="0.01">
-
-                <button type="submit">Guardar Emprendimiento</button>
-            </form>
-        </section>
 </body>
 </html>
