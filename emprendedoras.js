@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const data = {
-      emprendedoras: {   // 🔴 ESTE ERA EL ERROR
+      emprendedora: {   // ✅ SINGULAR
         nombre_emprendedora: nombre,
         contacto: contacto,
         estado: "Activo"
