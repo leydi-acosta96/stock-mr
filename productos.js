@@ -34,3 +34,7 @@ if (formProducto) {
       .catch(error => console.error("Error:", error));
   });
 }
+
+function volverInicio() {
+  window.location.href = "../index.html";
+}
