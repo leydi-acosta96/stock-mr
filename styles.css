@@ -126,6 +126,27 @@ form button {
 form button:hover {
     background-color: #b1788d;
 }
+/* ================================
+   BOTONES
+================================ */
+
+button {
+  background-color: #d4a373; /* rosé elegante */
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b08968;
+}
+
+
+
 
 /* ================================
    TABLAS
