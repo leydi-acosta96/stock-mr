@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
 
   const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras";
   const form = document.getElementById("formEmprendedora");
