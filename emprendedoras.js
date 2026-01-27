@@ -7,28 +7,39 @@ const HEADERS = {
 const formEmprendedora = document.getElementById("formEmprendedora");
 
 if (formEmprendedora) {
-  formEmprendedora.addEventListener("submit", function (e) {
+  formEmprendedora.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const emprendedora = {
-      emprendedora: {
+    const payload = {
+      emprendedoras: {
         nombre_emprendedora: document.getElementById("nombreEmprendedora").value,
         contacto: document.getElementById("contactoEmprendedora").value,
         estado: "Activo"
       }
     };
 
-    fetch(`${API_URL}/emprendedoras`, {
-      method: "POST",
-      headers: HEADERS,
-      body: JSON.stringify(emprendedora)
-    })
-      .then(res => res.json())
-      .then(() => {
+    try {
+      const res = await fetch(`${API_URL}/emprendedoras`, {
+        method: "POST",
+        headers: HEADERS,
+        body: JSON.stringify(payload)
+      });
+
+      console.log("STATUS:", res.status);
+
+      const data = await res.json();
+      console.log("RESPUESTA:", data);
+
+      if (res.ok) {
         alert("Emprendedora registrada correctamente");
         formEmprendedora.reset();
-      })
-      .catch(error => console.error("Error:", error));
+      } else {
+        alert("Error al guardar. Revisa la consola.");
+      }
+
+    } catch (error) {
+      console.error("ERROR DE RED:", error);
+    }
   });
 }
 
