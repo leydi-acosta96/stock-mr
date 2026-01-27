@@ -130,22 +130,18 @@ form button:hover {
    BOTONES
 ================================ */
 
-form button {
-  background-color: #d4a373;
-  color: white;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
+button {
+    padding: 10px;
+    background-color: #c48b9f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-form button:hover {
-  background-color: #b08968;
+button:hover {
+    background-color: #b1788d;
 }
-
-
 
 /* ================================
    TABLAS
