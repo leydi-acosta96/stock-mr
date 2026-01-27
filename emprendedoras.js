@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const data = {
-      emprendedora: {   // ✅ SINGULAR
-        nombre_emprendedora: nombre,
+      emprendedora: {
+        nombreEmprendedora: nombre, // 🔥 CLAVE
         contacto: contacto,
         estado: "Activo"
       }
