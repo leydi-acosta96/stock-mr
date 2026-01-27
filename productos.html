@@ -14,11 +14,20 @@
             <h2>Registro de Productos</h2>
 
             <form id="formProducto">
+
+                <label>Código del producto</label>
+                        <input type="text" id="codigoProducto" readonly>
+                
                 <label>Nombre del producto</label>
                 <input type="text" id="nombreProducto" required>
 
                 <label>Categoría</label>
-                <input type="text" id="categoriaProducto">
+                    <select id="categoriaProducto">
+                      <option value="">Seleccione</option>
+                      <option value="Accesorios">Accesorios</option>
+                      <option value="Ropa">Ropa</option>
+                      <option value="Cosmetica">Cosmética</option>
+                    </select>
 
                 <label>Precio</label>
                 <input type="number" id="precioProducto" step="0.01">
