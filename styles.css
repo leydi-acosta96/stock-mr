@@ -130,7 +130,7 @@ form button:hover {
    BOTONES
 ================================ */
 
-button {
+.button {
   background-color: #d4a373; /* rosé elegante */
   color: white;
   padding: 12px 18px;
