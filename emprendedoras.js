@@ -1,36 +1,45 @@
-const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras";
+document.addEventListener("DOMContentLoaded", () => {
 
-const form = document.getElementById("formEmprendedora");
+  const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras";
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
+  const form = document.getElementById("formEmprendedora");
 
-  const data = {
-    emprendedora: {
-      nombre_emprendedora: document.getElementById("nombreEmprendedora").value,
-      contacto: document.getElementById("contactoEmprendedora").value,
-      estado: "Activo"
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombreEmprendedora").value.trim();
+    const contacto = document.getElementById("contactoEmprendedora").value.trim();
+
+    if (!nombre) {
+      alert("Debes ingresar el nombre de la emprendedora");
+      return;
     }
-  };
 
-  fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer mr12#"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(res => {
-    console.log("STATUS:", res.status);
-    return res.json();
-  })
-  .then(resp => {
-    console.log("RESPUESTA:", resp);
-    alert("Emprendedora guardada");
-    form.reset();
-  })
-  .catch(err => console.error("ERROR:", err));
+    const data = {
+      emprendedora: {
+        nombre_emprendedora: nombre,
+        contacto: contacto,
+        estado: "Activo"
+      }
+    };
+
+    fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer mr12#"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(resp => {
+      console.log("RESPUESTA:", resp);
+      alert("Emprendedora guardada correctamente");
+      form.reset();
+    })
+    .catch(err => console.error("ERROR:", err));
+  });
+
 });
 
 function volverInicio() {
