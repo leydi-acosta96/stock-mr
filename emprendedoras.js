@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     const data = {
-      emprendedoras: {   // 👈 CLAVE
+      emprendedora: {   // 👈 CLAVE
         id: document.getElementById("idEmprendedora").value,
         nombreEmprendedora: document.getElementById("nombreEmprendedora").value,
         nombreEmprendimiento: document.getElementById("nombreEmprendimiento").value,
