@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", () => {
 
   const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras";
   const form = document.getElementById("formEmprendedora");
@@ -6,7 +7,7 @@
     e.preventDefault();
 
     const data = {
-      emprendedora: {
+      emprendedoras: {   // 👈 CLAVE
         id: document.getElementById("idEmprendedora").value,
         nombreEmprendedora: document.getElementById("nombreEmprendedora").value,
         nombreEmprendimiento: document.getElementById("nombreEmprendimiento").value,
@@ -26,11 +27,12 @@
       body: JSON.stringify(data)
     })
     .then(res => res.json())
-    .then(() => {
+    .then(resp => {
+      console.log("RESPUESTA:", resp);
       alert("Emprendedora registrada correctamente");
       form.reset();
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error("ERROR:", err));
   });
 
 });
