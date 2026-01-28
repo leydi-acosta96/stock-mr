@@ -51,6 +51,6 @@ form.addEventListener("submit", function (e) {
     });
 });
 
-function volverInicio() {
+document.getElementById("btnVolver").addEventListener("click", () => {
   window.location.href = "index.html";
-}
+});
