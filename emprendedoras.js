@@ -13,7 +13,7 @@ document.getElementById("formEmprendedora").addEventListener("submit", function 
     }
   };
 
-  fetch("AQUÍ_TU_URL_REAL_DE_SHEETY", {
+  fetch("https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
