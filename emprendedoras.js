@@ -54,7 +54,7 @@ form.addEventListener("submit", function (e) {
 document.getElementById("btnVolver").addEventListener("click", () => {
   window.location.href = "index.html";
 });
-// cambiar estado de emprendedoras 
+// Listar de emprendedoras 
 
 fetch("https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras")
   .then(res => res.json())
@@ -80,3 +80,35 @@ function mostrarEmprendedoras(lista) {
     `;
   });
 }
+
+// cambiar estado de emprendedoras
+
+function cambiarEstado(sheetyId) {
+
+  const nuevoEstado = prompt("Escribe el nuevo estado: Activo o Inactivo");
+
+  if (!nuevoEstado) return;
+
+  fetch(`TU_URL_DE_SHEETY/emprendedoras/${sheetyId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      emprendedora: {
+        estadoEmprendedora: nuevoEstado
+      }
+    })
+  })
+  .then(res => res.json())
+  .then(() => {
+    alert("Estado actualizado ✅");
+    location.reload();
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Error al actualizar ❌");
+  });
+}
+
+
