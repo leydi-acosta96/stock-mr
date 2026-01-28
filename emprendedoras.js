@@ -1,42 +1,52 @@
-document.addEventListener("DOMContentLoaded", () => {
+const form = document.getElementById("formEmprendedora");
 
-  const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras";
-  const form = document.getElementById("formEmprendedora");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-  form.addEventListener("submit", e => {
-    e.preventDefault();
+  // Capturar valores
+  const id = document.getElementById("idEmprendedora").value.trim();
+  const nombreEmprendedora = document.getElementById("nombreEmprendedora").value.trim();
+  const nombreEmprendimiento = document.getElementById("nombreEmprendimiento").value.trim();
+  const contactoEmprendedora = document.getElementById("contactoEmprendedora").value.trim();
+  const instagramEmprendedora = document.getElementById("instagramEmprendedora").value.trim();
+  const correoEmprendedora = document.getElementById("correoEmprendedora").value.trim();
+  const estadoEmprendedora = document.getElementById("estadoEmprendedora").value;
 
-    const data = {
-      emprendedora: {   // 👈 CLAVE
-        id: document.getElementById("idEmprendedora").value,
-        nombreEmprendedora: document.getElementById("nombreEmprendedora").value,
-        nombreEmprendimiento: document.getElementById("nombreEmprendimiento").value,
-        contactoEmprendedora: document.getElementById("contactoEmprendedora").value,
-        instagramEmprendedora: document.getElementById("instagramEmprendedora").value,
-        correoEmprendedora: document.getElementById("correoEmprendedora").value,
-        estadoEmprendedora: document.getElementById("estadoEmprendedora").value
-      }
-    };
+  // Validación básica
+  if (!id || !nombreEmprendedora || !nombreEmprendimiento) {
+    alert("Por favor completa los campos obligatorios");
+    return;
+  }
 
-    fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer mr12#"
-      },
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(resp => {
-      console.log("RESPUESTA:", resp);
-      alert("Emprendedora registrada correctamente");
+  // Objeto para Sheety
+  const data = {
+    emprendedora: {
+      id: id,
+      nombreEmprendedora: nombreEmprendedora,
+      nombreEmprendimiento: nombreEmprendimiento,
+      contactoEmprendedora: contactoEmprendedora,
+      instagramEmprendedora: instagramEmprendedora,
+      correoEmprendedora: correoEmprendedora,
+      estadoEmprendedora: estadoEmprendedora
+    }
+  };
+
+  // ⚠️ Reemplaza esta URL con la tuya de Sheety
+  fetch("https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(result => {
+      alert("Emprendedora registrada correctamente ✅");
       form.reset();
+      console.log(result);
     })
-    .catch(err => console.error("ERROR:", err));
-  });
-
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Ocurrió un error al guardar la información ❌");
+    });
 });
-
-function volverInicio() {
-  window.location.href = "index.html";
-}
