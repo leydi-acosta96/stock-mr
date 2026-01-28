@@ -1,94 +1,52 @@
-const URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras";
-const tabla = document.getElementById("tablaEmprendedoras");
+const form = document.getElementById("formEmprendedora");
 
-/* =====================
-   CARGAR EMPRENDEDORAS
-===================== */
-function cargarEmprendedoras() {
-  fetch(URL)
-    .then(res => res.json())
-    .then(data => {
-      tabla.innerHTML = "";
-
-      data.emprendedoras.forEach(e => {
-        const fila = document.createElement("tr");
-
-        fila.innerHTML = `
-          <td>${e.cedulaEmprendedora}</td>
-          <td>${e.nombreEmprendedora}</td>
-          <td>${e.nombreEmprendimiento}</td>
-          <td>${e.estadoEmprendedora}</td>
-          <td></td>
-        `;
-
-        const tdSelect = fila.children[4];
-
-        const select = document.createElement("select");
-        select.innerHTML = `
-          <option value="Activo">Activo</option>
-          <option value="Inactivo">Inactivo</option>
-        `;
-        select.value = e.estadoEmprendedora;
-
-        select.addEventListener("change", () => {
-          cambiarEstado(e.id, select.value);
-        });
-
-        tdSelect.appendChild(select);
-        tabla.appendChild(fila);
-      });
-    });
-}
-
-/* =====================
-   CAMBIAR ESTADO
-===================== */
-function cambiarEstado(sheetyId, nuevoEstado) {
-  fetch(`${URL}/${sheetyId}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      emprendedora: { estadoEmprendedora: nuevoEstado }
-    })
-  })
-  .then(res => res.json())
-  .then(() => {
-    alert("Estado actualizado ✅");
-    cargarEmprendedoras();
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Error al actualizar ❌");
-  });
-}
-
-/* =====================
-   REGISTRAR EMPRENDEDORA
-===================== */
-document.getElementById("formEmprendedora").addEventListener("submit", e => {
+form.addEventListener("submit", function (e) {
   e.preventDefault();
 
+  // Capturar valores
+  const id = document.getElementById("idEmprendedora").value.trim();
+  const nombreEmprendedora = document.getElementById("nombreEmprendedora").value.trim();
+  const nombreEmprendimiento = document.getElementById("nombreEmprendimiento").value.trim();
+  const contactoEmprendedora = document.getElementById("contactoEmprendedora").value.trim();
+  const instagramEmprendedora = document.getElementById("instagramEmprendedora").value.trim();
+  const correoEmprendedora = document.getElementById("correoEmprendedora").value.trim();
+  const estadoEmprendedora = document.getElementById("estadoEmprendedora").value;
+
+  // Validación básica
+  if (!id || !nombreEmprendedora || !nombreEmprendimiento) {
+    alert("Por favor completa los campos obligatorios");
+    return;
+  }
+
+  // Objeto para Sheety
   const data = {
     emprendedora: {
-      cedulaEmprendedora: document.getElementById("cedulaEmprendedora").value,
-      nombreEmprendedora: document.getElementById("nombreEmprendedora").value,
-      nombreEmprendimiento: document.getElementById("nombreEmprendimiento").value,
-      estadoEmprendedora: document.getElementById("estadoEmprendedora").value
+      id: id,
+      nombreEmprendedora: nombreEmprendedora,
+      nombreEmprendimiento: nombreEmprendimiento,
+      contactoEmprendedora: contactoEmprendedora,
+      instagramEmprendedora: instagramEmprendedora,
+      correoEmprendedora: correoEmprendedora,
+      estadoEmprendedora: estadoEmprendedora
     }
   };
 
-  fetch(URL, {
+  // ⚠️ Reemplaza esta URL con la tuya de Sheety
+  fetch("https://api.sheety.co/TU_USUARIO/TU_PROYECTO/emprendedoras", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(data)
   })
-  .then(() => {
-    e.target.reset();
-    cargarEmprendedoras();
-  });
+    .then(response => response.json())
+    .then(result => {
+      alert("Emprendedora registrada correctamente ✅");
+      form.reset();
+      console.log(result);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Ocurrió un error al guardar la información ❌");
+    });
 });
-
-/* =====================
-   INICIO
-===================== */
-cargarEmprendedoras();
