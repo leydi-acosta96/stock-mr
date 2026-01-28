@@ -50,3 +50,7 @@ form.addEventListener("submit", function (e) {
       alert("Ocurrió un error al guardar la información ❌");
     });
 });
+
+function volverInicio() {
+  window.location.href = "index.html";
+}
