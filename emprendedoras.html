@@ -13,6 +13,9 @@
 
     <form id="formEmprendedora">
 
+      <!-- ID interno Sheety -->
+      <input type="hidden" id="idEmprendedora">
+
       <label>Cédula</label>
       <input type="text" id="cedulaEmprendedora" required>
 
@@ -38,7 +41,7 @@
       </select>
 
       <button type="submit">Guardar Emprendedora</button>
-      <button type="button" id="btnVolver">⬅ Volver al inicio</button>
+      <button type="button" onclick="volverInicio()">⬅ Volver</button>
 
     </form>
   </section>
