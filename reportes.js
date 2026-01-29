@@ -104,3 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarVentasPorEmprendedora();
   cargarInventario();
 });
+
+
+/* =============================
+   VOLVER
+============================= */
+function volverInicio() {
+  window.location.href = "index.html";
+}
