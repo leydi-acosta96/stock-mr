@@ -72,7 +72,7 @@ document.getElementById("formEmprendedora").addEventListener("submit", function 
   };
 
   const url = id ? `${API_URL}/${id}` : API_URL;
-  const method = id ? "PATCH" : "POST";
+  const method = id ? "PUT" : "POST";
 
   fetch(url, {
     method,
