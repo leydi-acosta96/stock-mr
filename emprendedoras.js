@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    fetch(API_URL, {
+    fetch("https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
