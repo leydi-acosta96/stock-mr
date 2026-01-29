@@ -5,6 +5,7 @@ document.getElementById("formEmprendedora").addEventListener("submit", function 
 
   const data = {
     emprendedora: {
+      cedulaEmprendedora: document.getElementById("cedulaEmprendedora").value,
       nombreEmprendedora: document.getElementById("nombreEmprendedora").value,
       nombreEmprendimiento: document.getElementById("nombreEmprendimiento").value,
       contactoEmprendedora: document.getElementById("contactoEmprendedora").value,
@@ -17,8 +18,7 @@ document.getElementById("formEmprendedora").addEventListener("submit", function 
   fetch(API_URL, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer mr12#"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
   })
@@ -31,6 +31,6 @@ document.getElementById("formEmprendedora").addEventListener("submit", function 
   .catch(err => console.error("ERROR:", err));
 });
 
-function volverInicio() {
+document.getElementById("btnVolver").addEventListener("click", () => {
   window.location.href = "index.html";
-}
+});
