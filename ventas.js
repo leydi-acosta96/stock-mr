@@ -1,114 +1,93 @@
-// ===============================
-// CONFIGURACIÓN GENERAL
-// ===============================
-const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr";
-
+const API_BASE = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr";
 const HEADERS = {
   "Content-Type": "application/json",
   "Authorization": "Bearer mr12#"
 };
 
-// ===============================
-// ELEMENTOS DEL DOM
-// ===============================
-const formVenta = document.getElementById("formVenta");
 const selectProducto = document.getElementById("productoVenta");
-const inputCantidad = document.getElementById("cantidadVenta");
-const selectCanal = document.getElementById("canalVenta");
+const formVenta = document.getElementById("formVenta");
 
-// ===============================
-// CARGAR PRODUCTOS EN SELECT
-// ===============================
-function cargarProductosVenta() {
-  fetch(`${API_URL}/productos`, {
-    headers: HEADERS
-  })
+/*********************************
+ * CARGAR PRODUCTOS
+ *********************************/
+function cargarProductos() {
+  fetch(`${API_BASE}/productos`, { headers: HEADERS })
     .then(res => res.json())
     .then(data => {
-      selectProducto.innerHTML = "";
+      selectProducto.innerHTML = '<option value="">Seleccione producto</option>';
 
       data.productos.forEach(p => {
-        if (p.estado === "Activo") {
+        if (p.stock > 0) {
           const option = document.createElement("option");
           option.value = p.id;
-          option.textContent = `${p.nombre_producto} (Stock: ${p.stock})`;
+          option.dataset.stock = p.stock;
+          option.dataset.precio = p.precioProducto;
+          option.dataset.codigo = p.codigoProducto;
+          option.dataset.emprendedora = p.emprendedoraId;
+          option.textContent = `${p.codigoProducto} - ${p.nombreProducto} (Stock: ${p.stock})`;
           selectProducto.appendChild(option);
         }
       });
     })
-    .catch(error => console.error("Error al cargar productos:", error));
+    .catch(err => console.error("Error cargando productos:", err));
 }
 
-// Ejecutar carga si existe el select
-if (selectProducto) {
-  cargarProductosVenta();
-}
+/*********************************
+ * REGISTRAR VENTA
+ *********************************/
+formVenta.addEventListener("submit", e => {
+  e.preventDefault();
 
-// ===============================
-// REGISTRAR VENTA
-// ===============================
-if (formVenta) {
-  formVenta.addEventListener("submit", function (e) {
-    e.preventDefault();
+  const option = selectProducto.selectedOptions[0];
+  const productoId = option.value;
+  const cantidad = parseInt(document.getElementById("cantidadVenta").value);
+  const stockActual = parseInt(option.dataset.stock);
+  const precio = parseFloat(option.dataset.precio);
 
-    const productoId = selectProducto.value;
-    const cantidad = parseInt(inputCantidad.value);
-    const canal = selectCanal.value;
+  if (cantidad > stockActual) {
+    alert("Stock insuficiente");
+    return;
+  }
 
-    if (!productoId || !cantidad) {
-      alert("Debe seleccionar un producto y cantidad");
-      return;
+  const nuevaCantidad = stockActual - cantidad;
+
+  // 1️⃣ Registrar venta
+  const venta = {
+    venta: {
+      productoId: productoId,
+      codigoProducto: option.dataset.codigo,
+      cantidad: cantidad,
+      canalVenta: document.getElementById("canalVenta").value,
+      fechaVenta: new Date().toISOString().split("T")[0],
+      emprendedoraId: option.dataset.emprendedora,
+      total: (cantidad * precio).toFixed(2)
     }
+  };
 
-    // 1️⃣ Obtener producto actual
-    fetch(`${API_URL}/productos/${productoId}`, {
-      headers: HEADERS
-    })
-      .then(res => res.json())
-      .then(data => {
-        const producto = data.producto;
-
-        // Validar stock
-        if (cantidad > producto.stock) {
-          alert("Stock insuficiente");
-          return;
-        }
-
-        const nuevoStock = producto.stock - cantidad;
-        const totalVenta = cantidad * producto.precio;
-
-        // 2️⃣ Registrar venta
-        fetch(`${API_URL}/ventas`, {
-          method: "POST",
-          headers: HEADERS,
-          body: JSON.stringify({
-            venta: {
-              producto_id: productoId,
-              cantidad: cantidad,
-              canal_venta: canal,
-              total: totalVenta,
-              fecha: new Date().toISOString().split("T")[0]
-            }
-          })
-        });
-
-        // 3️⃣ Actualizar stock del producto
-        fetch(`${API_URL}/productos/${productoId}`, {
-          method: "PUT",
-          headers: HEADERS,
-          body: JSON.stringify({
-            producto: {
-              stock: nuevoStock
-            }
-          })
-        });
-
-        alert("Venta registrada correctamente");
-        formVenta.reset();
-
-        // Recargar productos e inventario
-        cargarProductosVenta();
+  fetch(`${API_BASE}/ventas`, {
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify(venta)
+  })
+  .then(() => {
+    // 2️⃣ Actualizar stock del producto
+    return fetch(`${API_BASE}/productos/${productoId}`, {
+      method: "PUT",
+      headers: HEADERS,
+      body: JSON.stringify({
+        producto: { stock: nuevaCantidad }
       })
-      .catch(error => console.error("Error en el proceso de venta:", error));
-  });
-}
+    });
+  })
+  .then(() => {
+    alert("Venta registrada correctamente");
+    formVenta.reset();
+    cargarProductos();
+  })
+  .catch(err => console.error("Error registrando venta:", err));
+});
+
+/*********************************
+ * INICIO
+ *********************************/
+document.addEventListener("DOMContentLoaded", cargarProductos);
