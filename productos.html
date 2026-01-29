@@ -1,87 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Inventarios | Mansión Rosé</title>
-
-    <!-- Estilos -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Registro de Productos</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <section id="productos" class="seccion">
-  <h2>Registro de Productos</h2>
 
-  <form id="formProducto">
+  <section class="seccion">
+    <h2>Registro de Productos</h2>
 
-    <!-- Código automático -->
-    <label>Código del producto</label>
-    <input type="text" id="codigoProducto" readonly>
+    <form id="formProducto">
 
-    <!-- Nombre -->
-    <label>Nombre del producto</label>
-    <input type="text" id="nombreProducto" required>
+      <!-- Código generado automáticamente -->
+      <label>Código del producto</label>
+      <input type="text" id="codigoProducto" readonly>
 
-    <!-- Categoría -->
-    <label>Categoría</label>
-    <select id="categoriaProducto" required>
-      <option value="">Seleccione una categoría</option>
-      <option value="Accesorios">Accesorios</option>
-      <option value="Ropa">Ropa</option>
-      <option value="Cosmetica">Cosmética</option>
-      <option value="Vestidos de baño">Vestidos de baño</option>
-    </select>
+      <label>Nombre del producto</label>
+      <input type="text" id="nombreProducto" required>
 
-    <!-- Precio -->
-    <label>Precio</label>
-    <input type="number" id="precioProducto" step="0.01" required>
+      <label>Categoría</label>
+      <select id="categoriaProducto" required>
+        <option value="">Seleccione una categoría</option>
+        <option value="Accesorios">Accesorios</option>
+        <option value="Ropa">Ropa</option>
+        <option value="Cosmetica">Cosmética</option>
+        <option value="Vestidos de baño">Vestidos de baño</option>
+      </select>
 
-    <!-- Stock -->
-    <label>Stock inicial</label>
-    <input type="number" id="stockProducto" required>
+      <label>Precio</label>
+      <input type="number" id="precioProducto" step="0.01" required>
 
-    <!-- Emprendedora -->
-    <label>Emprendedora</label>
-    <select id="emprendedora" required>
-      <option value="">Seleccione una emprendedora</option>
-      <!-- Se cargan dinámicamente desde Google Sheets -->
-    </select>
+      <label>Stock inicial</label>
+      <input type="number" id="stockProducto" required>
 
-    <!-- Botones -->
-    <button type="submit">Guardar Producto</button>
-    <button type="button" onclick="volverInicio()">⬅ Volver al inicio</button>
+      <label>Emprendedora</label>
+      <select id="emprendedoraId" required>
+        <option value="">Cargando emprendedoras...</option>
+      </select>
 
-  </form>
-</section>
+      <button type="submit">Guardar Producto</button>
+      <button type="button" onclick="window.location.href='index.html'">
+        ⬅ Volver al inicio
+      </button>
 
-<!-- SECCIÓN INVENTARIO -->
-        <section id="inventario" class="seccion">
-            <h2>Inventario Disponible</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Categoría</th>
-                        <th>Emprendedora</th>
-                        <th>Stock</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaInventario">
-                    <!-- Datos dinámicos -->
-                </tbody>
-            </table>
-        </section>
-    <!-- PIE DE PÁGINA -->
-    <footer class="footer">
-        <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
-    </footer>
+    </form>
+  </section>
+
+  <script src="productos.js"></script>
 </body>
-      
-   
-
-    <!-- JavaScript -->
-    <script src="productos.js"></script>
-    <script src="inventario.js"></script>
-
 </html>
