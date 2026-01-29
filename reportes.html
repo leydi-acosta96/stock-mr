@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reportes</title>
+</head>
 
+<body>
+
+<h2>Reportes del Sistema</h2>
+
+<section>
+  <h3>Ventas por período</h3>
+
+  <label>Desde</label>
+  <input type="date" id="fechaInicio">
+
+  <label>Hasta</label>
+  <input type="date" id="fechaFin">
+
+  <button onclick="generarReporteVentas()">Generar</button>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Código</th>
+        <th>Cantidad</th>
+        <th>Canal</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="tablaVentas"></tbody>
+  </table>
+</section>
+
+<hr>
+
+<section>
+  <h3>Ventas por emprendedora</h3>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Emprendedora</th>
+        <th>Total vendido</th>
+      </tr>
+    </thead>
+    <tbody id="tablaEmprendedoras"></tbody>
+  </table>
+</section>
+
+<hr>
+
+<section>
+  <h3>Inventario actual</h3>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Producto</th>
+        <th>Stock</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody id="tablaInventario"></tbody>
+  </table>
+</section>
+
+<script src="reportes.js"></script>
+</body>
+</html>
