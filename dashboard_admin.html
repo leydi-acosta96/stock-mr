@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Administrador | Mansión Rosé</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ENCABEZADO -->
+  <header class="header">
+    <h1>Panel de Administración</h1>
+    <p>Mansión Rosé · Sistema de Inventarios</p>
+
+    <button class="btn-login" onclick="cerrarSesion()">
+      Cerrar sesión
+    </button>
+  </header>
+
+  <!-- MENÚ -->
+  <nav class="menu">
+    <ul>
+      <li><a href="emprendedoras.html">Emprendedoras</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="inventario.html">Inventario</a></li>
+      <li><a href="ventas.html">Ventas</a></li>
+      <li><a href="reportes.html">Reportes</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <main class="contenido">
+
+    <section class="seccion">
+      <h2>Bienvenida Administradora</h2>
+      <p>
+        Desde este panel puedes administrar las emprendedoras,
+        supervisar el inventario, registrar productos, validar ventas
+        y consultar reportes para la toma de decisiones.
+      </p>
+    </section>
+
+    <section class="seccion">
+      <h2>Accesos rápidos</h2>
+
+      <ul>
+        <li>📌 Registrar nuevas emprendedoras</li>
+        <li>📦 Supervisar productos y stock</li>
+        <li>🛒 Controlar ventas físicas y digitales</li>
+        <li>📊 Analizar reportes del negocio</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="footer">
+    <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    function cerrarSesion() {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
