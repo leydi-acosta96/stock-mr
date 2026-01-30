@@ -310,3 +310,20 @@ td:contains("❌") {
     margin-top: 10px;
   }
 }
+
+
+.btn-login {
+  margin-top: 15px;
+  background-color: #ffffff;
+  color: #c48b9f;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  background-color: #f2e6ea;
+}
