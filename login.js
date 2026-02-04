@@ -5,24 +5,20 @@ document.getElementById("formLogin").addEventListener("submit", function (e) {
 
   const codigo = document.getElementById("codigoAcceso").value.trim();
 
-  if (!codigo) {
-    alert("Ingrese el código de acceso");
-    return;
-  }
-
   fetch(API_URL, {
+    method: "GET",
     headers: {
+      "Content-Type": "application/json",
       "Authorization": "Bearer mr12#"
     }
   })
     .then(res => {
-      if (!res.ok) {
-        throw new Error("Error HTTP: " + res.status);
-      }
+      console.log("STATUS:", res.status);
+      if (!res.ok) throw new Error("Error HTTP");
       return res.json();
     })
     .then(data => {
-      console.log("DATA SHEETY:", data);
+      console.log("DATA:", data);
 
       const usuario = data.usuarios.find(
         u => u.codigoAcceso === codigo
@@ -33,25 +29,18 @@ document.getElementById("formLogin").addEventListener("submit", function (e) {
         return;
       }
 
-      sessionStorage.setItem("usuario", JSON.stringify({
-        id: usuario.id,
-        nombre: usuario.nombreUsuario,
-        rol: usuario.rol
-      }));
+      sessionStorage.setItem("usuario", JSON.stringify(usuario));
 
-      // Redirección por rol
       if (usuario.rol === "admin") {
         window.location.href = "dashboard_admin.html";
       } else if (usuario.rol === "emprendedora") {
         window.location.href = "dashboard_emprendedora.html";
       } else if (usuario.rol === "vendedora") {
         window.location.href = "dashboard_vendedora.html";
-      } else {
-        alert("Rol no reconocido");
       }
     })
     .catch(err => {
-      console.error("ERROR FETCH:", err);
+      console.error(err);
       alert("Error de conexión con el sistema");
     });
 });
