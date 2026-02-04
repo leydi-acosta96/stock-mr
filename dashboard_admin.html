@@ -2,70 +2,66 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel Administrador | Mansión Rosé</title>
+  <title>Dashboard Administrador</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="dashboard">
 
-  <!-- ENCABEZADO -->
-  <header class="header">
+  <!-- HEADER -->
+  <header class="dashboard-header">
     <h1>Panel de Administración</h1>
-    <p>Mansión Rosé · Sistema de Inventarios</p>
-
-    <button class="btn-login" onclick="cerrarSesion()">
-      Cerrar sesión
-    </button>
+    <button id="btnCerrarSesion">Cerrar sesión</button>
   </header>
 
-  <!-- MENÚ -->
-  <nav class="menu">
-    <ul>
-      <li><a href="emprendedoras.html">Emprendedoras</a></li>
-      <li><a href="productos.html">Productos</a></li>
-      <li><a href="inventario.html">Inventario</a></li>
-      <li><a href="ventas.html">Ventas</a></li>
-      <li><a href="reportes.html">Reportes</a></li>
-    </ul>
-  </nav>
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="dashboard-container">
 
-  <!-- CONTENIDO -->
-  <main class="contenido">
+    <!-- SIDEBAR -->
+    <aside class="dashboard-sidebar">
+      <nav>
+        <ul>
+          <li><a href="emprendedoras.html">👩‍💼 Emprendedoras</a></li>
+          <li><a href="productos.html">📦 Productos</a></li>
+          <li><a href="ventas.html">💰 Ventas</a></li>
+          <li><a href="reportes.html">📊 Reportes</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-    <section class="seccion">
-      <h2>Bienvenida Administradora</h2>
-      <p>
-        Desde este panel puedes administrar las emprendedoras,
-        supervisar el inventario, registrar productos, validar ventas
-        y consultar reportes para la toma de decisiones.
-      </p>
-    </section>
+    <!-- CONTENIDO -->
+    <main class="dashboard-content">
 
-    <section class="seccion">
-      <h2>Accesos rápidos</h2>
+      <section class="dashboard-cards">
 
-      <ul>
-        <li>📌 Registrar nuevas emprendedoras</li>
-        <li>📦 Supervisar productos y stock</li>
-        <li>🛒 Controlar ventas físicas y digitales</li>
-        <li>📊 Analizar reportes del negocio</li>
-      </ul>
-    </section>
+        <div class="card">
+          <h3>Total Emprendedoras</h3>
+          <p id="totalEmprendedoras">--</p>
+        </div>
 
-  </main>
+        <div class="card">
+          <h3>Total Productos</h3>
+          <p id="totalProductos">--</p>
+        </div>
 
-  <!-- PIE DE PÁGINA -->
-  <footer class="footer">
-    <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
-  </footer>
+        <div class="card">
+          <h3>Ventas del Mes</h3>
+          <p id="totalVentas">--</p>
+        </div>
 
-  <!-- JS -->
-  <script>
-    function cerrarSesion() {
-      localStorage.clear();
-      window.location.href = "login.html";
-    }
-  </script>
+      </section>
+
+      <section class="dashboard-info">
+        <h2>Bienvenida Administradora</h2>
+        <p>
+          Desde este panel puedes administrar emprendedoras, productos,
+          ventas y acceder a los reportes del sistema.
+        </p>
+      </section>
+
+    </main>
+
+  </div>
 
 </body>
 </html>
