@@ -1,50 +1,95 @@
-const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/usuarios";
+const API_USUARIOS = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/usuarios";
 
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
 
-  const usuarioInput = document.getElementById("usuario").value.trim();
-  const rolInput = document.getElementById("rol").value;
-  const destino = localStorage.getItem("destino");
+  const form = document.getElementById("loginForm");
+  const mensajeAccion = document.getElementById("mensajeAccion");
+  const errorLogin = document.getElementById("errorLogin");
 
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      const usuario = data.usuarios.find(u =>
-        u.usuario === usuarioInput &&
-        u.rol === rolInput &&
-        u.estado === "Activo"
-      );
+  // 1️⃣ Obtener acción solicitada desde index
+  const accion = localStorage.getItem("accionSistema");
+
+  // Mensajes según acción
+  const mensajes = {
+    emprendedoras: "Acceso solo para ADMINISTRADOR",
+    productos: "Acceso para EMPRENDEDORA o ADMIN",
+    ventas: "Acceso para VENDEDORA, EMPRENDEDORA o ADMIN",
+    reportes: "Acceso exclusivo para ADMINISTRADOR"
+  };
+
+  if (accion && mensajes[accion]) {
+    mensajeAccion.textContent = mensajes[accion];
+  }
+
+  // 2️⃣ Submit del login
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorLogin.textContent = "";
+
+    const codigo = document.getElementById("codigo").value.trim();
+
+    if (!codigo) {
+      errorLogin.textContent = "Debe ingresar un código";
+      return;
+    }
+
+    try {
+      const res = await fetch(API_USUARIOS);
+      const data = await res.json();
+
+      const usuario = data.usuarios.find(u => u.codigo === codigo);
 
       if (!usuario) {
-        alert("Credenciales inválidas o usuario inactivo");
+        errorLogin.textContent = "Código no válido";
         return;
       }
 
-      // Guardar sesión
-      localStorage.setItem("rol", usuario.rol);
-      localStorage.setItem("usuario", usuario.usuario);
+      // 3️⃣ Validar permisos según acción
+      if (!tienePermiso(usuario.rol, accion)) {
+        errorLogin.textContent = "No tiene permisos para esta acción";
+        return;
+      }
 
-      // Redirección según rol y acción
-      redirigir(usuario.rol, destino);
-    });
+      // 4️⃣ Guardar sesión
+      localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+
+      // 5️⃣ Redirección
+      redirigir(accion);
+
+    } catch (error) {
+      console.error(error);
+      errorLogin.textContent = "Error al validar el acceso";
+    }
+  });
 });
 
-function redirigir(rol, destino) {
-  if (destino === "emprendedoras" && rol === "admin") {
-    window.location.href = "emprendedoras.html";
-  }
-  else if (destino === "productos" && (rol === "admin" || rol === "emprendedora")) {
-    window.location.href = "productos.html";
-  }
-  else if (destino === "ventas") {
-    window.location.href = "ventas.html";
-  }
-  else if (destino === "reportes" && rol === "admin") {
-    window.location.href = "reportes.html";
-  }
-  else {
-    alert("No tienes permiso para acceder a esta sección");
-    window.location.href = "index.html";
-  }
+// 🔐 PERMISOS
+function tienePermiso(rol, accion) {
+
+  const permisos = {
+    emprendedoras: ["admin"],
+    productos: ["admin", "emprendedora"],
+    ventas: ["admin", "emprendedora", "vendedora"],
+    reportes: ["admin"]
+  };
+
+  return permisos[accion]?.includes(rol);
+}
+
+// 🔀 REDIRECCIONES
+function redirigir(accion) {
+
+  const rutas = {
+    emprendedoras: "emprendedoras.html",
+    productos: "productos.html",
+    ventas: "ventas.html",
+    reportes: "reportes.html"
+  };
+
+  window.location.href = rutas[accion];
+}
+
+// 🔙 Volver
+function volverInicio() {
+  window.location.href = "index.html";
 }
