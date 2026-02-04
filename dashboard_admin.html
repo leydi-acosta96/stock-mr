@@ -2,61 +2,43 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard Administrador | Mansión Rosé</title>
+  <title>Dashboard Administrador</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-  <!-- ENCABEZADO -->
   <header class="header">
     <h1>Panel de Administración</h1>
-    <p>Mansión Rosé · Control general del sistema</p>
-
-    <button class="btn-login" onclick="cerrarSesion()">
-      Cerrar sesión
-    </button>
+    <p id="bienvenidaAdmin"></p>
+    <button onclick="cerrarSesion()">Cerrar sesión</button>
   </header>
 
-  <!-- CONTENIDO -->
-  <main class="contenido">
+  <section class="contenido">
 
-    <section class="seccion">
+    <div class="seccion">
       <h2>Gestión del sistema</h2>
 
-      <div class="dashboard-grid">
-
+      <div class="menu-dashboard">
         <button onclick="location.href='emprendedoras.html'">
-          👩‍💼 Registrar Emprendedoras
+          Registrar emprendedoras
         </button>
 
         <button onclick="location.href='productos.html'">
-          📦 Registrar Productos
+          Gestionar productos
         </button>
 
         <button onclick="location.href='ventas.html'">
-          🧾 Registrar Ventas
+          Registrar ventas
         </button>
 
         <button onclick="location.href='reportes.html'">
-          📊 Ver Reportes
+          Ver reportes
         </button>
-
       </div>
-    </section>
+    </div>
 
-  </main>
+  </section>
 
-  <footer class="footer">
-    <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
-  </footer>
-
-  <script>
-    function cerrarSesion() {
-      localStorage.clear();
-      window.location.href = "index.html";
-    }
-  </script>
-
+  <script src="dashboard_admin.js"></script>
 </body>
 </html>
