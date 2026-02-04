@@ -2,32 +2,36 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Iniciar sesión</title>
+  <title>Inicio de Sesión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <section class="seccion">
+  <section class="seccion login">
+
     <h2>Inicio de sesión</h2>
+    <p id="mensajeAccion"></p>
 
     <form id="loginForm">
-      <label>Usuario</label>
-      <input type="text" id="usuario" required>
 
-      <label>Rol</label>
-      <select id="rol" required>
-        <option value="">Seleccione</option>
-        <option value="admin">Administrador</option>
-        <option value="emprendedora">Emprendedora</option>
-        <option value="vendedora">Vendedora</option>
-      </select>
+      <label for="codigo">Código de acceso</label>
+      <input 
+        type="text" 
+        id="codigo" 
+        placeholder="Ingrese su código" 
+        required
+      >
 
       <button type="submit">Ingresar</button>
-      <button type="button" onclick="window.location.href='index.html'">
-        Volver
-      </button>
+
     </form>
+
+    <p id="errorLogin" class="error"></p>
+
+    <button type="button" onclick="volverInicio()">⬅ Volver</button>
+
   </section>
 
   <script src="login.js"></script>
