@@ -1,49 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Inventarios | Mansión Rosé</title>
-
-    <!-- Estilos -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Sistema de Inventarios | Mansión Rosé</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-    <!-- ENCABEZADO -->
-    <header class="header">
-        <h1>Sistema de Inventarios</h1>
-        <p>Mansión Rosé · Control de productos por emprendedora</p>
-            <button class="btn-login" onclick="location.href='login.html'">
-                Iniciar sesión
-              </button>
-    </header>
+  <!-- ENCABEZADO -->
+  <header class="header">
+    <h1>Sistema de Inventarios</h1>
+    <p>Mansión Rosé · Gestión de emprendimientos</p>
 
-   
-   
-    <main class="menu">
-         <!-- MENÚ PRINCIPAL -->
-        <nav class="menu">
-            <ul>
-                <li><a href="productos.html">Registro de Productos</a></li>
-                <li><a href="emprendedoras.html">Emprendimientos</a></li>
-                <li><a href="ventas">Registro de Ventas</a></li>
-                <li><a href="reportes">Reportes</a></li>
-            </ul>
-        </nav>
+    <button class="btn-login" onclick="irALogin('inicio')">
+      Iniciar sesión
+    </button>
+  </header>
 
-    </main>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="contenido">
 
-    <!-- PIE DE PÁGINA -->
-    <footer class="footer">
-        <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
-    </footer>
+    <section class="seccion">
+      <h2>¿Qué deseas hacer?</h2>
 
-    <!-- JavaScript -->
-    <script src="productos.js"></script>
-    <script src="inventario.js"></script>
-    <script src="ventas.js"></script>
-    <script src="reportes.js"></script>
+      <div class="acciones">
+
+        <button onclick="irALogin('emprendedoras')">
+          Registrar emprendedoras
+        </button>
+
+        <button onclick="irALogin('productos')">
+          Registrar productos
+        </button>
+
+        <button onclick="irALogin('ventas')">
+          Registrar ventas
+        </button>
+
+        <button onclick="irALogin('reportes')">
+          Ver reportes
+        </button>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE -->
+  <footer class="footer">
+    <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    function irALogin(destino) {
+      localStorage.setItem("destino", destino);
+      window.location.href = "login.html";
+    }
+  </script>
 
 </body>
 </html>
