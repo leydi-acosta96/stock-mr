@@ -1,52 +1,50 @@
 const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/usuarios";
 
-document.getElementById("formLogin").addEventListener("submit", function (e) {
+document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const codigo = document.getElementById("codigoAcceso").value.trim();
-  const mensaje = document.getElementById("mensajeLogin");
+  const usuarioInput = document.getElementById("usuario").value.trim();
+  const rolInput = document.getElementById("rol").value;
+  const destino = localStorage.getItem("destino");
 
-  if (!codigo) {
-    mensaje.textContent = "Ingrese el código de acceso";
-    return;
-  }
-
-  fetch(API_URL, {
-    headers: {
-      "Authorization": "Bearer mr12#"
-    }
-  })
+  fetch(API_URL)
     .then(res => res.json())
     .then(data => {
-      const usuario = data.usuarios.find(
-        u => u.codigoAcceso === codigo && u.estado === "Activo"
+      const usuario = data.usuarios.find(u =>
+        u.usuario === usuarioInput &&
+        u.rol === rolInput &&
+        u.estado === "Activo"
       );
 
       if (!usuario) {
-        mensaje.textContent = "Código inválido o usuario inactivo";
+        alert("Credenciales inválidas o usuario inactivo");
         return;
       }
 
-      // 👉 Guardamos sesión
-      localStorage.setItem("usuario", JSON.stringify({
-        id: usuario.id,
-        rol: usuario.rol,
-        emprendedora_id: usuario.emprendedora_id || null
-      }));
+      // Guardar sesión
+      localStorage.setItem("rol", usuario.rol);
+      localStorage.setItem("usuario", usuario.usuario);
 
-      // 👉 Redirección por rol
-      if (usuario.rol === "admin") {
-        window.location.href = "dashboard_admin.html";
-      } 
-      else if (usuario.rol === "emprendedora") {
-        window.location.href = "dashboard_emprendedora.html";
-      } 
-      else if (usuario.rol === "vendedora") {
-        window.location.href = "dashboard_vendedora.html";
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      mensaje.textContent = "Error al conectar con el servidor";
+      // Redirección según rol y acción
+      redirigir(usuario.rol, destino);
     });
 });
+
+function redirigir(rol, destino) {
+  if (destino === "emprendedoras" && rol === "admin") {
+    window.location.href = "emprendedoras.html";
+  }
+  else if (destino === "productos" && (rol === "admin" || rol === "emprendedora")) {
+    window.location.href = "productos.html";
+  }
+  else if (destino === "ventas") {
+    window.location.href = "ventas.html";
+  }
+  else if (destino === "reportes" && rol === "admin") {
+    window.location.href = "reportes.html";
+  }
+  else {
+    alert("No tienes permiso para acceder a esta sección");
+    window.location.href = "index.html";
+  }
+}
