@@ -2,23 +2,32 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Login | Sistema de Inventarios</title>
+  <title>Iniciar sesión</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <section class="seccion login">
-    <h2>Ingreso al sistema</h2>
+  <section class="seccion">
+    <h2>Inicio de sesión</h2>
 
-    <form id="formLogin">
-      <label>Código de acceso</label>
-      <input type="text" id="codigoAcceso" required placeholder="Ej: ADMIN001">
+    <form id="loginForm">
+      <label>Usuario</label>
+      <input type="text" id="usuario" required>
+
+      <label>Rol</label>
+      <select id="rol" required>
+        <option value="">Seleccione</option>
+        <option value="admin">Administrador</option>
+        <option value="emprendedora">Emprendedora</option>
+        <option value="vendedora">Vendedora</option>
+      </select>
 
       <button type="submit">Ingresar</button>
+      <button type="button" onclick="window.location.href='index.html'">
+        Volver
+      </button>
     </form>
-
-    <p id="mensajeLogin" class="mensaje-error"></p>
   </section>
 
   <script src="login.js"></script>
