@@ -1,16 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
+const rol = usuario.rol; // admin, emprendedora, vendedora
+const destino = localStorage.getItem("destino");
 
-  const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/usuarios";
-
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      console.log("RESPUESTA COMPLETA DE SHEETY:", data);
-      alert("Mira la consola (F12)");
-    })
-    .catch(err => {
-      console.error("ERROR FETCH:", err);
-      alert("Error de conexión");
-    });
-
-});
+if (destino === "productos" && (rol === "admin" || rol === "emprendedora")) {
+  window.location.href = "productos.html";
+}
+else if (destino === "reportes" && rol === "admin") {
+  window.location.href = "reportes.html";
+}
+else {
+  alert("No tienes permiso para acceder a esta sección");
+}
