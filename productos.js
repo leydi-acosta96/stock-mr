@@ -1,3 +1,9 @@
+const usuario = JSON.parse(sessionStorage.getItem("usuario"));
+
+if (!usuario || !["admin", "emprendedora"].includes(usuario.rol)) {
+  alert("No tienes permisos para registrar productos.");
+  window.location.href = "index.html";
+}
 /*********************************
  * CONFIGURACIÓN GENERAL
  *********************************/
