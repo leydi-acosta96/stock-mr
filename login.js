@@ -1,9 +1,9 @@
 const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/usuarios";
 
-document.getElementById("formLogin").addEventListener("submit", function (e) {
+document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const codigo = document.getElementById("codigoAcceso").value.trim();
+  const codigo = document.getElementById("codigo").value.trim();
 
   fetch(API_URL, {
     headers: {
@@ -23,20 +23,18 @@ document.getElementById("formLogin").addEventListener("submit", function (e) {
         return;
       }
 
+      // Guardamos sesión
       sessionStorage.setItem("usuario", JSON.stringify(usuario));
 
-      switch (usuario.rol) {
-        case "admin":
-          window.location.href = "dashboard_admin.html";
-          break;
-        case "emprendedora":
-          window.location.href = "dashboard_emprendedora.html";
-          break;
-        case "vendedora":
-          window.location.href = "dashboard_vendedora.html";
-          break;
-        default:
-          alert("Rol no reconocido");
+      // Redirección por rol
+      if (usuario.rol === "admin") {
+        window.location.href = "dashboard_admin.html";
+      } else if (usuario.rol === "emprendedora") {
+        window.location.href = "dashboard_emprendedora.html";
+      } else if (usuario.rol === "vendedora") {
+        window.location.href = "dashboard_vendedora.html";
+      } else {
+        alert("Rol no reconocido");
       }
     })
     .catch(err => {
@@ -44,3 +42,7 @@ document.getElementById("formLogin").addEventListener("submit", function (e) {
       alert("Error de conexión con el sistema");
     });
 });
+
+function volverInicio() {
+  window.location.href = "index.html";
+}
