@@ -1,3 +1,10 @@
+const usuario = JSON.parse(sessionStorage.getItem("usuario"));
+
+if (!usuario || usuario.rol !== "admin") {
+  alert("Acceso restringido. Solo el administrador puede ingresar aquí.");
+  window.location.href = "index.html";
+}
+
 const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/emprendedoras";
 
 /* =============================
