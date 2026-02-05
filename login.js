@@ -1,48 +1,56 @@
 const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/usuarios";
 
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+// Esperar a que cargue el DOM
+document.addEventListener("DOMContentLoaded", () => {
 
-  const codigo = document.getElementById("codigo").value.trim();
+  const form = document.getElementById("loginForm");
 
-  fetch(API_URL, {
-    headers: {
-      "Authorization": "Bearer mr12#"
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log("Usuarios:", data.usuarios);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const usuario = data.usuarios.find(
-        u => u.codigoAcceso === codigo
-      );
+    const codigo = document.getElementById("codigo").value.trim();
 
-      if (!usuario) {
-        alert("Código inválido");
-        return;
-      }
-
-      // Guardamos sesión
-      sessionStorage.setItem("usuario", JSON.stringify(usuario));
-
-      // Redirección por rol
-      if (usuario.rol === "admin") {
-        window.location.href = "dashboard_admin.html";
-      } else if (usuario.rol === "emprendedora") {
-        window.location.href = "dashboard_emprendedora.html";
-      } else if (usuario.rol === "vendedora") {
-        window.location.href = "dashboard_vendedora.html";
-      } else {
-        alert("Rol no reconocido");
+    fetch(API_URL, {
+      headers: {
+        "Authorization": "Bearer mr12#"
       }
     })
-    .catch(err => {
-      console.error(err);
-      alert("Error de conexión con el sistema");
-    });
+      .then(res => res.json())
+      .then(data => {
+        console.log("Usuarios:", data.usuarios);
+
+        const usuario = data.usuarios.find(
+          u => u.codigoAcceso === codigo
+        );
+
+        if (!usuario) {
+          alert("Código inválido");
+          return;
+        }
+
+        // Guardar sesión
+        sessionStorage.setItem("usuario", JSON.stringify(usuario));
+
+        // Redirigir según rol
+        if (usuario.rol === "admin") {
+          window.location.href = "dashboard_admin.html";
+        } else if (usuario.rol === "emprendedora") {
+          window.location.href = "dashboard_emprendedora.html";
+        } else if (usuario.rol === "vendedora") {
+          window.location.href = "dashboard_vendedora.html";
+        } else {
+          alert("Rol no reconocido");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Error de conexión con el sistema");
+      });
+  });
+
 });
 
+// Botón volver
 function volverInicio() {
   window.location.href = "index.html";
 }
