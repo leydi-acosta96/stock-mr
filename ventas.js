@@ -1,3 +1,10 @@
+const usuario = JSON.parse(sessionStorage.getItem("usuario"));
+
+if (!usuario || !["admin", "emprendedora", "vendedora"].includes(usuario.rol)) {
+  alert("Debes iniciar sesión para registrar ventas.");
+  window.location.href = "login.html";
+}
+
 const API_BASE = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr";
 const HEADERS = {
   "Content-Type": "application/json",
