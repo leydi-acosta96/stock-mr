@@ -2,66 +2,63 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Sistema de Inventarios</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Inventarios | Mansión Rosé</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- HEADER -->
+  <!-- ENCABEZADO -->
   <header class="header">
     <h1>Sistema de Inventarios</h1>
     <p>Mansión Rosé · Gestión de emprendimientos</p>
+
+    <button class="btn-login" onclick="irALogin('inicio')">
+      Iniciar sesión
+    </button>
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="seccion">
+  <main class="contenido">
 
-    <h2>¿Qué deseas hacer?</h2>
+    <section class="seccion">
+      <h2>¿Qué deseas hacer?</h2>
 
-    <!-- MENSAJE -->
-    <p id="mensajePermiso" class="mensaje"></p>
+      <div class="acciones">
 
-    <!-- BOTONES -->
-    <div class="botones">
+        <button onclick="irALogin('emprendedoras')">
+          Registrar emprendedoras
+        </button>
 
-      <!-- LOGIN -->
-      <button id="btnLogin" onclick="window.location.href='login.html'">
-        🔐 Iniciar sesión
-      </button>
+        <button onclick="irALogin('productos')">
+          Registrar productos
+        </button>
 
-      <button id="btnLogout" style="display:none">
-        🚪 Cerrar sesión
-      </button>
+        <button onclick="irALogin('ventas')">
+          Registrar ventas
+        </button>
 
-      <button id="btnEmprendedoras" onclick="window.location.href='emprendedoras.html'">
-        👩‍💼 Registrar emprendedoras
-      </button>
+        <button onclick="irALogin('reportes')">
+          Ver reportes
+        </button>
 
-      <button id="btnProductos" onclick="window.location.href='productos.html'">
-        📦 Registrar productos
-      </button>
-
-      <button id="btnVentas" onclick="window.location.href='ventas.html'">
-        💰 Registrar ventas
-      </button>
-
-      <button id="btnReportes" onclick="window.location.href='reportes.html'">
-        📊 Ver reportes
-      </button>
-
-    </div>
+      </div>
+    </section>
 
   </main>
 
-  <!-- FOOTER -->
+  <!-- PIE -->
   <footer class="footer">
     <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
   </footer>
 
-  <!-- ⚠️ EL SCRIPT SIEMPRE AL FINAL -->
-  <script src="control_rol.js"></script>
+  <!-- SCRIPT -->
+  <script>
+    function irALogin(destino) {
+      localStorage.setItem("destino", destino);
+      window.location.href = "login.html";
+    }
+  </script>
 
 </body>
 </html>
