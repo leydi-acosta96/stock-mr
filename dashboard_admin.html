@@ -1,44 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Dashboard Administrador</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<h2>Panel de Administración</h2>
+<p>Bienvenido, <span id="nombreAdmin"></span></p>
 
-  <header class="header">
-    <h1>Panel de Administración</h1>
-    <p id="bienvenidaAdmin"></p>
-    <button onclick="cerrarSesion()">Cerrar sesión</button>
-  </header>
-
-  <section class="contenido">
-
-    <div class="seccion">
-      <h2>Gestión del sistema</h2>
-
-      <div class="menu-dashboard">
-        <button onclick="location.href='emprendedoras.html'">
-          Registrar emprendedoras
-        </button>
-
-        <button onclick="location.href='productos.html'">
-          Gestionar productos
-        </button>
-
-        <button onclick="location.href='ventas.html'">
-          Registrar ventas
-        </button>
-
-        <button onclick="location.href='reportes.html'">
-          Ver reportes
-        </button>
-      </div>
-    </div>
-
-  </section>
-
-  <script src="dashboard_admin.js"></script>
-</body>
-</html>
+<div class="menu-dashboard">
+  <button onclick="ir('emprendedoras.html')">Emprendedoras</button>
+  <button onclick="ir('productos.html')">Productos</button>
+  <button onclick="ir('ventas.html')">Ventas</button>
+  <button onclick="ir('reportes.html')">Reportes</button>
+  <button onclick="cerrarSesion()">Cerrar sesión</button>
+</div>
