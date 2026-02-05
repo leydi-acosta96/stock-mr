@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Sistema de Inventarios | Mansión Rosé</title>
+  <title>Sistema de Inventarios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -12,55 +13,60 @@
   <header class="header">
     <h1>Sistema de Inventarios</h1>
     <p>Mansión Rosé · Gestión de emprendimientos</p>
-
-    <button class="btn-login" onclick="irALogin('inicio')">
-      Iniciar sesión
-    </button>
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="contenido">
+  <main>
 
     <section class="seccion">
+
       <h2>¿Qué deseas hacer?</h2>
 
+      <!-- BOTÓN LOGIN (VISIBLE SOLO SIN SESIÓN) -->
+      <button id="btnLogin" onclick="window.location.href='login.html'">
+        🔐 Iniciar sesión
+      </button>
+
+      <!-- BOTONES DEL SISTEMA -->
       <div class="acciones">
 
-        <button onclick="irALogin('emprendedoras')">
-          Registrar emprendedoras
+        <button id="btnEmprendedoras" onclick="window.location.href='emprendedoras.html'">
+          👩‍💼 Registrar Emprendedoras
         </button>
 
-        <button onclick="irALogin('productos')">
-          Registrar productos
+        <button id="btnProductos" onclick="window.location.href='productos.html'">
+          📦 Registrar Productos
         </button>
 
-        <button onclick="irALogin('ventas')">
-          Registrar ventas
+        <button id="btnVentas" onclick="window.location.href='ventas.html'">
+          🧾 Registrar Ventas
         </button>
 
-        <button onclick="irALogin('reportes')">
-          Ver reportes
+        <button id="btnReportes" onclick="window.location.href='reportes.html'">
+          📊 Ver Reportes
+        </button>
+
+        <!-- BOTÓN CERRAR SESIÓN -->
+        <button id="btnLogout">
+          🚪 Cerrar sesión
         </button>
 
       </div>
+
+      <!-- MENSAJE DE PERMISOS -->
+      <p id="mensajePermiso" class="mensaje"></p>
+
     </section>
-    
-    <script src="control_rol.js"></script>
 
   </main>
 
-  <!-- PIE -->
+  <!-- PIE DE PÁGINA -->
   <footer class="footer">
     <p>Proyecto de Graduación · Licenciatura en Comercio Electrónico</p>
   </footer>
 
-  <!-- SCRIPT -->
-  <script>
-    function irALogin(destino) {
-      localStorage.setItem("destino", destino);
-      window.location.href = "login.html";
-    }
-  </script>
+  <!-- CONTROL DE ROLES -->
+  <script src="control_rol.js"></script>
 
 </body>
 </html>
