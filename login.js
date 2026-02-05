@@ -3,52 +3,44 @@ const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/usu
 document.getElementById("formLogin").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const codigoIngresado = document.getElementById("codigoUsuario").value.trim();
-  const error = document.getElementById("errorLogin");
-  error.textContent = "";
+  const codigo = document.getElementById("codigoAcceso").value.trim();
 
-  fetch(API_URL)
+  fetch(API_URL, {
+    headers: {
+      "Authorization": "Bearer mr12#"
+    }
+  })
     .then(res => res.json())
     .then(data => {
+      console.log("Usuarios:", data.usuarios);
 
-      console.log("RESPUESTA SHEETY:", data);
-
-      const listaUsuarios = data.usuarios;
-
-      if (!listaUsuarios) {
-        error.textContent = "Error: no se encontró la hoja usuarios";
-        return;
-      }
-
-      const usuario = listaUsuarios.find(
-        u => u.codigoAcceso === codigoIngresado
+      const usuario = data.usuarios.find(
+        u => u.codigoAcceso === codigo
       );
 
       if (!usuario) {
-        error.textContent = "Código inválido";
+        alert("Código inválido");
         return;
       }
 
-      // ✅ GUARDAMOS SESIÓN
-      sessionStorage.setItem("usuario", JSON.stringify({
-        id: usuario.id,
-        nombre: usuario.nombreUsuario,
-        rol: usuario.rol,
-        codigo: usuario.codigoAcceso
-      }));
+      sessionStorage.setItem("usuario", JSON.stringify(usuario));
 
-      // 🚀 REDIRECCIÓN POR ROL
-      if (usuario.rol === "admin") {
-        window.location.href = "dashboard_admin.html";
-      } else if (usuario.rol === "emprendedora") {
-        window.location.href = "productos.html";
-      } else if (usuario.rol === "vendedora") {
-        window.location.href = "ventas.html";
+      switch (usuario.rol) {
+        case "admin":
+          window.location.href = "dashboard_admin.html";
+          break;
+        case "emprendedora":
+          window.location.href = "dashboard_emprendedora.html";
+          break;
+        case "vendedora":
+          window.location.href = "dashboard_vendedora.html";
+          break;
+        default:
+          alert("Rol no reconocido");
       }
-
     })
     .catch(err => {
       console.error(err);
-      error.textContent = "Error de conexión con el sistema";
+      alert("Error de conexión con el sistema");
     });
 });
