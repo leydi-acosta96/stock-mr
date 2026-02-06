@@ -1,57 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Dashboard Administrador</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-
-  <!-- HEADER -->
-  <header class="header">
-    <h1>Panel de Administración</h1>
-    <div>
-      <span id="nombreAdmin"></span>
-      <button id="btnLogout">Cerrar sesión</button>
-    </div>
-  </header>
-
-  <!-- CONTENEDOR PRINCIPAL -->
-  <div class="dashboard-container">
-
-       <!-- CONTENIDO -->
-    <main class="content">
-
-      <section id="inicio" class="section active">
-        <h2>Bienvenida Administrador</h2>
-      
-      </section>
-
-      <section id="emprendedoras" class="section">
-        <h2>Gestión de Emprendedoras</h2>
-        <a href="emprendedoras.html">Ir al módulo</a>
-      </section>
-
-      <section id="productos" class="section">
-        <h2>Gestión de Productos</h2>
-        <a href="productos.html">Ir al módulo</a>
-      </section>
-
-      <section id="ventas" class="section">
-        <h2>Ventas</h2>
-        <a href="ventas.html">Ir al módulo</a>
-      </section>
-
-      <section id="reportes" class="section">
-        <h2>Reportes</h2>
-        <a href="reportes.html">Ver reportes</a>
-      </section>
-
-    </main>
-
-  </div>
-
-  <script src="dashboard_admin.js"></script>
-</body>
-</html>
+<!DOCTYPE html> 
+  <html lang="es"> <head> <meta charset="UTF-8">
+    <title>Dashboard Administrador</title> 
+      <link rel="stylesheet" href="styles.css"> </head> 
+    <body> 
+      <!-- HEADER --> 
+      <header class="header"> 
+        <h1>Panel de Administración</h1> <button id="btnLogout">Cerrar sesión</button> 
+      </header> <!-- CONTENEDOR PRINCIPAL --> 
+      <div class="dashboard-container"> 
+        <!-- MENÚ LATERAL --> 
+        <aside class="sidebar">
+          <button data-section="emprendedoras">Emprendedoras</button> 
+          <button data-section="productos">Productos</button> 
+          <button data-section="ventas">Ventas</button> 
+          <button data-section="reportes">Reportes</button> 
+        </aside>
+        <!-- CONTENIDO --> 
+        <main class="content"> 
+          <!-- BIENVENIDA --> 
+          <section id="inicio" class="section active"> 
+            <h2>Bienvenida Administrador</h2> 
+            <p>Selecciona una opción del menú para comenzar.</p>
+          </section> 
+          <!-- EMPRENDEDORAS --> 
+          <section id="emprendedoras" class="section"> 
+            <h2>Gestión de Emprendedoras</h2> 
+            <p>Aquí se gestiona el registro y edición de emprendedoras.</p>
+            <a href="emprendedoras.html">Ir al módulo</a> 
+          </section> 
+          <!-- PRODUCTOS --> 
+          <section id="productos" class="section"> 
+            <h2>Gestión de Productos</h2> 
+            <a href="productos.html">Ir al módulo</a> 
+          </section>
+          <!-- VENTAS --> 
+          <section id="ventas" class="section"> 
+            <h2>Ventas</h2>
+            <a href="ventas.html">Ir al módulo</a>
+          </section> 
+          <!-- REPORTES --> 
+          <section id="reportes" class="section">
+            <h2>Reportes</h2> 
+            <a href="reportes.html">Ver reportes</a> 
+          </section>
+        </main>
+      </div>
+    </body>
+  </html>
