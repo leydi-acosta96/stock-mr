@@ -32,38 +32,64 @@
     </aside>
 
     <!-- CONTENIDO -->
-    <main class="content">
+    <div class="app">
 
-      <!-- INICIO -->
-      <section id="inicio" class="section active">
-        <h2>Bienvenida Administrador</h2>
-        <p>Selecciona una opción del menú para comenzar.</p>
-      </section>
+  <aside class="sidebar">
+    <div class="brand">
+      <h2>🌿 Rosé Admin</h2>
+    </div>
 
-      <!-- EMPRENDEDORAS -->
-      <section id="emprendedoras" class="section">
-        <h2>Gestión de Emprendedoras</h2>
-        <p>Aquí se gestiona el registro y edición de emprendedoras.</p>
-        <a href="emprendedoras.html">Ir al módulo</a>
-      </section>
+    <nav>
+      <button data-section="inicio" class="active">Dashboard</button>
+      <button data-section="productos">Productos</button>
+      <button data-section="ventas">Ventas</button>
+      <button data-section="reportes">Reportes</button>
+    </nav>
 
-      <!-- PRODUCTOS -->
-      <section id="productos" class="section">
-        <h2>Gestión de Productos</h2>
-        <a href="productos.html">Ir al módulo</a>
-      </section>
+    <button id="btnLogout" class="logout">Cerrar sesión</button>
+  </aside>
 
-      <!-- VENTAS -->
-      <section id="ventas" class="section">
-        <h2>Ventas</h2>
-        <a href="ventas.html">Ir al módulo</a>
-      </section>
+  <main class="main">
 
-      <!-- REPORTES -->
-      <section id="reportes" class="section">
-        <h2>Reportes</h2>
-        <a href="reportes.html">Ver reportes</a>
-      </section>
+    <!-- Topbar -->
+    <div class="topbar">
+      <h1 id="tituloSeccion">Dashboard</h1>
+      <div class="user-info">
+        👤 <span id="nombreAdmin"></span>
+      </div>
+    </div>
+
+    <!-- Contenido dinámico -->
+    <section id="inicio" class="section active">
+      <div class="cards">
+        <div class="card">
+          <h3>Total Productos</h3>
+          <p>120</p>
+        </div>
+
+        <div class="card">
+          <h3>Ventas del Mes</h3>
+          <p>$4,500</p>
+        </div>
+
+        <div class="card">
+          <h3>Emprendedoras</h3>
+          <p>35</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="productos" class="section">
+      <h2>Gestión de Productos</h2>
+    </section>
+
+    <section id="ventas" class="section">
+      <h2>Ventas</h2>
+    </section>
+
+    <section id="reportes" class="section">
+      <h2>Reportes</h2>
+    </section>
 
     </main>
 
