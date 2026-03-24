@@ -39,6 +39,15 @@
     <tbody id="tablaUsuarios"></tbody>
   </table>
 
+  <input type="text" id="buscarUsuario" placeholder="Buscar..." onkeyup="buscarUsuario()">
+
+<select id="filtroRol" onchange="filtrarRol()">
+  <option value="">Todos</option>
+  <option value="admin">Admin</option>
+  <option value="emprendedora">Emprendedora</option>
+  <option value="vendedora">Vendedora</option>
+</select>
+
 </section>
 
 <script src="usuarios.js"></script>
