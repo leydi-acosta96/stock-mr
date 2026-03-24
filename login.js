@@ -50,7 +50,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-// Botón volver
-function volverInicio() {
-  window.location.href = "index.html";
-}
+
