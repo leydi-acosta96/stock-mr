@@ -102,9 +102,7 @@ document.getElementById("formEmprendedora").addEventListener("submit", function 
 /* =============================
    VOLVER
 ============================= */
-function volver() {
-  window.history.back();
-}
+
 
 /* =============================
    INICIAL
