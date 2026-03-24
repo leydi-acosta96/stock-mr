@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Usuarios</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<button onclick="window.history.back()" class="btn-volver">← Volver</button>
+
+<section class="section">
+  <h2>Gestión de Usuarios</h2>
+
+  <button onclick="mostrarFormularioUsuario()">+ Nuevo Usuario</button>
+
+  <form id="formUsuario" style="display:none;">
+    <input type="text" id="nombreUsuarioNuevo" placeholder="Nombre" required>
+
+    <select id="rolNuevo" required>
+      <option value="">Seleccionar Rol</option>
+      <option value="emprendedora">Emprendedora</option>
+      <option value="vendedora">Vendedora</option>
+    </select>
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Rol</th>
+        <th>Código</th>
+      </tr>
+    </thead>
+    <tbody id="tablaUsuarios"></tbody>
+  </table>
+
+</section>
+
+<script src="usuarios.js"></script>
+
+</body>
+</html>
