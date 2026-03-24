@@ -102,8 +102,8 @@ document.getElementById("formEmprendedora").addEventListener("submit", function 
 /* =============================
    VOLVER
 ============================= */
-function volverInicio() {
-  window.location.href = "index.html";
+function volver() {
+  window.history.back();
 }
 
 /* =============================
