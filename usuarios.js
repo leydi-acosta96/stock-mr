@@ -1,38 +1,28 @@
 const API_URL = "https://api.sheety.co/301327363ae1c8d017800bb4566af87c/bdMr/usuarios";
 
+
 // Mostrar formulario
 function mostrarFormularioUsuario() {
   document.getElementById("formUsuario").style.display = "block";
 }
 
-// Generar código automático
+
+// Generar código
 function generarCodigo(rol) {
 
-  let prefijo = "";
-
-  if (rol === "vendedora") {
-    prefijo = "VEND";
-  } else if (rol === "emprendedora") {
-    prefijo = "EMP";
-  }
-
+  let prefijo = rol === "vendedora" ? "VEND" : "EMP";
   const numero = Math.floor(100 + Math.random() * 900);
 
   return prefijo + numero;
 }
 
 
-// Guardar usuario nuevo
+// Crear usuario
 document.getElementById("formUsuario").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const nombre = document.getElementById("nombreUsuarioNuevo").value.trim();
   const rol = document.getElementById("rolNuevo").value;
-
-  if (!nombre || !rol) {
-    alert("Completa los campos");
-    return;
-  }
 
   const codigo = generarCodigo(rol);
 
@@ -52,31 +42,19 @@ document.getElementById("formUsuario").addEventListener("submit", function(e) {
     },
     body: JSON.stringify(nuevoUsuario)
   })
-  .then(res => res.json())
-  .then(data => {
-
-    alert("Usuario creado correctamente\nCódigo: " + codigo);
-
+  .then(() => {
+    alert("Usuario creado - Código: " + codigo);
     document.getElementById("formUsuario").reset();
-    document.getElementById("formUsuario").style.display = "none";
-
     cargarUsuarios();
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Error al crear usuario");
   });
-
 });
 
 
-// Cargar usuarios en tabla
+// Cargar usuarios
 function cargarUsuarios() {
 
   fetch(API_URL, {
-    headers: {
-      "Authorization": "Bearer mr12#"
-    }
+    headers: { "Authorization": "Bearer mr12#" }
   })
   .then(res => res.json())
   .then(data => {
@@ -84,24 +62,111 @@ function cargarUsuarios() {
     const tabla = document.getElementById("tablaUsuarios");
     tabla.innerHTML = "";
 
-    data.usuarios.forEach(usuario => {
+    data.usuarios.forEach(u => {
 
-      const fila = `
+      tabla.innerHTML += `
         <tr>
-          <td>${usuario.nombreUsuario}</td>
-          <td>${usuario.rol}</td>
-          <td>${usuario.codigoAcceso}</td>
+          <td>${u.nombreUsuario}</td>
+          <td>${u.rol}</td>
+          <td>
+            ${u.codigoAcceso}
+            <button onclick="copiarCodigo('${u.codigoAcceso}')">📋</button>
+          </td>
+          <td>
+            <button onclick="editarUsuario(${u.id}, '${u.nombreUsuario}', '${u.rol}')">✏️</button>
+            <button onclick="eliminarUsuario(${u.id})">🗑️</button>
+          </td>
         </tr>
       `;
 
-      tabla.innerHTML += fila;
-
     });
 
+  });
+}
+
+
+// Copiar código
+function copiarCodigo(codigo) {
+  navigator.clipboard.writeText(codigo);
+  alert("Código copiado: " + codigo);
+}
+
+
+// Eliminar usuario
+function eliminarUsuario(id) {
+
+  if (!confirm("¿Eliminar usuario?")) return;
+
+  fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": "Bearer mr12#"
+    }
   })
-  .catch(err => {
-    console.error(err);
-    alert("Error cargando usuarios");
+  .then(() => {
+    cargarUsuarios();
+  });
+}
+
+
+// Editar usuario
+function editarUsuario(id, nombre, rol) {
+
+  const nuevoNombre = prompt("Editar nombre:", nombre);
+  if (!nuevoNombre) return;
+
+  const nuevoRol = prompt("Editar rol (admin, emprendedora, vendedora):", rol);
+  if (!nuevoRol) return;
+
+  fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer mr12#"
+    },
+    body: JSON.stringify({
+      usuario: {
+        nombreUsuario: nuevoNombre,
+        rol: nuevoRol
+      }
+    })
+  })
+  .then(() => cargarUsuarios());
+}
+
+
+// Buscar usuario
+function buscarUsuario() {
+
+  const texto = document.getElementById("buscarUsuario").value.toLowerCase();
+  const filas = document.querySelectorAll("#tablaUsuarios tr");
+
+  filas.forEach(fila => {
+    fila.style.display = fila.textContent.toLowerCase().includes(texto)
+      ? ""
+      : "none";
+  });
+
+}
+
+
+// Filtrar por rol
+function filtrarRol() {
+
+  const rol = document.getElementById("filtroRol").value;
+  const filas = document.querySelectorAll("#tablaUsuarios tr");
+
+  filas.forEach(fila => {
+
+    if (!rol) {
+      fila.style.display = "";
+      return;
+    }
+
+    fila.style.display = fila.textContent.includes(rol)
+      ? ""
+      : "none";
+
   });
 
 }
